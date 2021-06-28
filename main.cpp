@@ -45,7 +45,7 @@ int main()
             start = false;
         }
         else {
-            cout << "invaid responce please select select a vaild responce"
+            cout << "invaid responce please select select a vaild responce";
         }
 
 
