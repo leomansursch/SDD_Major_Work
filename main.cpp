@@ -19,6 +19,7 @@ bool uport = false;
 string host, ports;
     // temp storage
 string tmp1, tmp2;
+char tmp3;
     // commands for terminal
 string ping;
 string port;
@@ -85,10 +86,61 @@ int main(){
     }
    
    if (resolve == true){
-        ping = "ping -a -n 3 " + host;
+        /*ping = "ping -a -n 3 " + host + " > nul";
         tmp2 = system(ping.c_str());
         cout << endl << "a" << tmp2;
         Sleep(5000);
-        cout << tmp2;
+        cout << tmp2;*/
+        tmp2 = pingr();
+        if (tmp2 == "0"){
+            cout << "a";
+        } else {
+            cout << "f";
+        }
    }
+}
+
+
+int pingr() { //named pingr due to running out of var ideas.
+    const size_t stringSize = 1000;
+  tmp3 = "C:\\Windows\\System32\\PING.exe -a -n 3 " + host;
+  STARTUPINFO si;
+  PROCESS_INFORMATION pi;
+  DWORD exit_code;
+  string commandLine[stringSize] = tmp3;
+  WCHAR wCommandLine[stringSize];
+  mbstowcs (wCommandLine, commandLine, stringSize);
+
+  ZeroMemory( &si, sizeof(si) );
+  si.cb = sizeof(si);
+  ZeroMemory( &pi, sizeof(pi) );
+
+  // Start the child process. 
+  if( !CreateProcess( NULL,   // No module name (use command line)
+      wCommandLine,   // Command line
+      NULL,           // Process handle not inheritable
+      NULL,           // Thread handle not inheritable
+      FALSE,          // Set handle inheritance to FALSE
+      0,              // No creation flags
+      NULL,           // Use parent's environment block
+      NULL,           // Use parent's starting directory 
+      &si,            // Pointer to STARTUPINFO structure
+      &pi )           // Pointer to PROCESS_INFORMATION structure
+  ) 
+  {
+      printf("CreateProcess failed (%d).\n", GetLastError() );
+      return -1;
+  }
+
+  // Wait until child process exits.
+  WaitForSingleObject( pi.hProcess, INFINITE );
+
+  GetExitCodeProcess(pi.hProcess, &exit_code);
+
+  printf("the execution of: \"%s\"\nreturns: %d\n", commandLine, exit_code);
+
+  // Close process and thread handles. 
+  CloseHandle( pi.hProcess );
+  CloseHandle( pi.hThread );
+  return 0;
 }
