@@ -1,13 +1,15 @@
 /*//Use g++ for build
 
 #include <winsock2.h>
-#include <Windows.h> //Sleep
+#include <Windows.h> //Sleep 
 #include <stdlib.h> //System
 
 
 using namespace std;*/
+#include <Windows.h> //Sleep 
 #include <iostream>  //cout
 using namespace std;
+//now testing host checking
 /*
 string host = "abcdnef.com";
 string tst = "ping " + host + "";
@@ -22,10 +24,10 @@ int main(){
     system(pingc.c_str());
     Sleep(5000);
 
-}*/
+}
 
 //system(tst.c_str())//
-/*
+
 string host = "192.168.0.247";
 string tst = "ping " + host;
 string tst2;
@@ -35,8 +37,8 @@ int main(){
     cout << tst2;
     Sleep(5000);
 
-}*/
-/*
+}
+
 int main() {
 string host;
 cout << "put in host" << endl;
@@ -53,7 +55,8 @@ if (x==0){
 }*/
 
 
-//now testing sending TCP packets for Scanner()
+//now testing sending TCP packets for Scanner() DONE 13/7/21
+/*
 
 #ifndef UNICODE
 #define UNICODE
@@ -68,71 +71,99 @@ if (x==0){
 // Need to link with Ws2_32.libB
 #pragma comment(lib, "ws2_32.lib")
 string host = "192.168.0.247";
-int port = {1,2,3,54,89,66};
-int tmp1 = size(port);
-int main()
-for (int i = 0; i < tmp1; i++) {
-    cout << port[i] << endl;
-}
+int port[] = {80,22,69};
+int portresponce[] = {};
+int sport = sizeof(port) / sizeof(port[ 0 ]) - 1 ;
+int main(){
+
+    cout << sport << endl;
+    for (int i = 0; i <= sport; i++) {
+        cout << portresponce[i] << endl;
+        cout << port[i] << endl;
+        //----------------------
+        // Initialize Winsock
+        WSADATA wsaData;
+        int iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
+        if (iResult != NO_ERROR) {
+            wprintf(L"WSAStartup function failed with error: %d\n", iResult);
+            return 1;
+        }else{
+            cout << "tst" << endl;
+        }
+        //----------------------
+        // Create a SOCKET for connecting to server
+        SOCKET ConnectSocket;
+        ConnectSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+        if (ConnectSocket == INVALID_SOCKET) {
+            wprintf(L"socket function failed with error: %ld\n", WSAGetLastError());
+            WSACleanup();
+            return 1;
+        }else{
+            cout << "socket created" << endl;
+        }
+        //----------------------
+        // The sockaddr_in structure specifies the address family,
+        // IP address, and port of the server to be connected to.
+        sockaddr_in clientService;
+        clientService.sin_family = AF_INET;
+        clientService.sin_addr.s_addr = inet_addr(host.c_str());
+        clientService.sin_port = htons(port[i]);
+        cout << clientService.sin_family << endl <<  clientService.sin_addr.s_addr << endl << clientService.sin_port << endl;
+
+        //----------------------
+        // Connect to server.
+        iResult = connect(ConnectSocket, (SOCKADDR *) & clientService, sizeof (clientService));
+        if (iResult == SOCKET_ERROR) {
+            wprintf(L"connect function failed with error: %ld\n", WSAGetLastError());
+            portresponce[i] = 0;
+            iResult = closesocket(ConnectSocket);
+            if (iResult == SOCKET_ERROR)
+                wprintf(L"closesocket function failed with error: %ld\n", WSAGetLastError());
+            WSACleanup();
+        }
+        else{
+            cout << "wtf is going on" << endl;
+            wprintf(L"Connected to server.\n");
+            portresponce[i] = 1;
+            cout << portresponce[i] << endl;
+        }
 
 
-/*
-{
-    //----------------------
-    // Initialize Winsock
-    WSADATA wsaData;
-    int iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
-    if (iResult != NO_ERROR) {
-        wprintf(L"WSAStartup function failed with error: %d\n", iResult);
-        return 1;
-    }else{
-        cout << "tst";
-    }
-    //----------------------
-    // Create a SOCKET for connecting to server
-    SOCKET ConnectSocket;
-    ConnectSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    if (ConnectSocket == INVALID_SOCKET) {
-        wprintf(L"socket function failed with error: %ld\n", WSAGetLastError());
-        WSACleanup();
-        return 1;
-    }else{
-        cout << "socket create";
-    }
-    //----------------------s
-    // The sockaddr_in structure specifies the address family,
-    // IP address, and port of the server to be connected to.
-    sockaddr_in clientService;
-    clientService.sin_family = AF_INET;
-    clientService.sin_addr.s_addr = inet_addr(host.c_str());
-    clientService.sin_port = htons(port);
-    cout << clientService.sin_family << endl <<  clientService.sin_addr.s_addr << endl << clientService.sin_port;
 
-    //----------------------
-    // Connect to server.
-    iResult = connect(ConnectSocket, (SOCKADDR *) & clientService, sizeof (clientService));
-    if (iResult == SOCKET_ERROR) {
-        wprintf(L"connect function failed with error: %ld\n", WSAGetLastError());
         iResult = closesocket(ConnectSocket);
-        if (iResult == SOCKET_ERROR)
+        if (iResult == SOCKET_ERROR) {
             wprintf(L"closesocket function failed with error: %ld\n", WSAGetLastError());
+            WSACleanup();
+        }
+        cout << endl << endl << endl;
         WSACleanup();
-        return 1;
-    }
-    else{
-        cout << "wtf is going on";
-    }
 
-    wprintf(L"Connected to server.\n");
-
-    iResult = closesocket(ConnectSocket);
-    if (iResult == SOCKET_ERROR) {
-        wprintf(L"closesocket function failed with error: %ld\n", WSAGetLastError());
-        WSACleanup();
-        return 1;
+    }
+    for (int i = 0; i <= sport; i++) {
+    cout << portresponce[i] << endl;
     }
 
-    WSACleanup();
+
+}*/
+
+
+//now testing file outputs and how to get data from other subprograms 
+int main(){
+    HANDLE h = CreateFile("test.txt",    // name of the file
+                          GENERIC_WRITE, // open for writing
+                          0,             // sharing mode, none in this case
+                          0,             // use default security descriptor
+                          CREATE_ALWAYS, // overwrite if exists
+                          FILE_ATTRIBUTE_NORMAL,
+                          0);
+    if (h)
+    {
+        std::cout << "CreateFile() succeeded\n";
+        CloseHandle(h);
+    }
+    else
+    {
+        std::cerr << "CreateFile() failed:" << GetLastError() << "\n";
+    }
     return 0;
-    */
 }

@@ -2,29 +2,38 @@
 #include <iostream>  //cout
 #include <Windows.h> //Sleep
 #include <stdlib.h> //System
-#include <winsock2.h>
+#include <winsock2.h> // scanner()
+#include <ws2tcpip.h> // scanner()
+#include <stdio.h> // scanner()
+#ifndef UNICODE
+#define UNICODE
+#endif
+#pragma comment(lib, "ws2_32.lib") // dependancy of <winsock2.h>
 using namespace std;
 //Each section of the program is broken down into subprograms (Starting(), resolver(), Scaner(), Outputs())
 //This allows me to do further explination about each subprogram while not cluttering up main()
 //Variables
     //debug
-bool debug = false;
+bool debug = false; //example data also verbose data about where we are
     //States
 
-bool start = true;
-bool resolve = false;
-bool scan = false;
-bool output = false;
+bool start = true; // gathe user input
+bool resolve = false; //check if host alive
+bool scan = false; // check ports are open (optional)
+bool output = false; // output into file (optional)
 
-bool uport = false;
+bool uport = false; // decision for scan()
+bool uout = false; // decision for output()
     //user inputs
-string host, ports;
+string host, ports; // user input for host and ports 
     // temp storage
-string tmp1, tmp2;
-int tmp3;
+string tmp1, tmp2; // tmp1 for debug menu selection, tmp2 for starting() menu selection
+int tmp3, tmp4; // tmp3 for ping() alive/dead, tmp4 for no. elemnts of arrays scanner()
     // commands for terminal
 string ping;
-string port;
+int port[] = {};
+int portresponce[] = {};
+int tmp4 = sizeof(port) / sizeof(port[ 0 ]) - 1 ;
 
 void debugexamples(){
     cout << "ALERT DEBUG IS ON" << endl;
@@ -93,6 +102,74 @@ int resolver() {
 }
 
 int scanner() {
+for (int i = 0; i <= tmp4; i++) {
+        cout << portresponce[i] << endl;
+        cout << port[i] << endl;
+        //----------------------
+        // Initialize Winsock
+        WSADATA wsaData;
+        int iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
+        if (iResult != NO_ERROR) {
+            wprintf(L"WSAStartup function failed with error: %d\n", iResult);
+            return 1;
+        }else{
+            cout << "tst" << endl;
+        }
+        //----------------------
+        // Create a SOCKET for connecting to server
+        SOCKET ConnectSocket;
+        ConnectSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+        if (ConnectSocket == INVALID_SOCKET) {
+            wprintf(L"socket function failed with error: %ld\n", WSAGetLastError());
+            WSACleanup();
+            return 1;
+        }else{
+            cout << "socket created" << endl;
+        }
+        //----------------------
+        // The sockaddr_in structure specifies the address family,
+        // IP address, and port of the server to be connected to.
+        sockaddr_in clientService;
+        clientService.sin_family = AF_INET;
+        clientService.sin_addr.s_addr = inet_addr(host.c_str());
+        clientService.sin_port = htons(port[i]);
+        cout << clientService.sin_family << endl <<  clientService.sin_addr.s_addr << endl << clientService.sin_port << endl;
+
+        //----------------------
+        // Connect to server.
+        iResult = connect(ConnectSocket, (SOCKADDR *) & clientService, sizeof (clientService));
+        if (iResult == SOCKET_ERROR) {
+            wprintf(L"connect function failed with error: %ld\n", WSAGetLastError());
+            portresponce[i] = 0;
+            iResult = closesocket(ConnectSocket);
+            if (iResult == SOCKET_ERROR)
+                wprintf(L"closesocket function failed with error: %ld\n", WSAGetLastError());
+            WSACleanup();
+        }
+        else{
+            cout << "wtf is going on" << endl;
+            wprintf(L"Connected to server.\n");
+            portresponce[i] = 1;
+            cout << portresponce[i] << endl;
+        }
+
+
+
+        iResult = closesocket(ConnectSocket);
+        if (iResult == SOCKET_ERROR) {
+            wprintf(L"closesocket function failed with error: %ld\n", WSAGetLastError());
+            WSACleanup();
+        }
+        cout << endl << endl << endl;
+        WSACleanup();
+
+    }
+    scan == false;
+    return 0;
+
+}
+
+int fout() {
 
 }
 
@@ -101,12 +178,16 @@ int main(){
         debugexamples(); //calling debug setting of variable
     } 
    if (start == true){
-        starting();
+        starting(); // gathering user input
     }   
    if (resolve == true){
-        resolver();
+        resolver(); // is the host alive
     }
    if (scan == true){
-       scanner();
+       scanner(); // are the ports open (optional)
     }
+   if (output == true){
+       fout(); // output to a file (optional)
+   }
+   
 }
