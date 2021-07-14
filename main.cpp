@@ -6,6 +6,7 @@
 #include <ws2tcpip.h> // scanner()
 #include <stdio.h>  // scanner()
 #include <fstream> // fout() file creation,opening,editing,closing
+#include <string.h> // string 
 #ifndef UNICODE
 #define UNICODE
 #endif
@@ -26,13 +27,12 @@ bool uout = false; // decision for output()
     //user inputs
 string host, fileoutput; // user input for host and file output directory
     // temp storage
-string tmp1, tmp2; // tmp1 for debug menu selection, tmp2 for starting() menu selection
-int tmp3; // tmp3 for ping() alive/dead
-    // commands for terminal
-string ping;
+string tmp1, tmp2, tmp5; // tmp1 for debug menu selection, tmp2 for starting() menu selection
+int tmp3, tmp4; // tmp3 for ping() alive/dead, tmp4 for no. elemnts of arrays scanner() used for itterating the for loop the amount of times that entitys are in the array
+//internal variables 
 int port[] = {}; // creats an array of any length for ports
 int portresponce[] = {}; // creates an array of any length for the responce from the ports either 0 for fail 1 for success
-int tmp4 = sizeof(port) / sizeof(port[ 0 ]) - 1 ; // tmp4 for no. elemnts of arrays scanner() used for itterating the for loop the amount of times that entitys are in the array
+
 
 void debugexamples() {
     cout << "ALERT DEBUG IS ON" << endl;
@@ -77,12 +77,25 @@ void starting() {
         if (tmp2 == "y") {
             useport = true;
             cout << "Please enter the ports seperated by a comma" << endl;
-            cin >> port;
-            return;
-        } else if (tmp2 == "n") {
-            return;
+            cin >> tmp2;
+            tmp2 = tmp2 + ",";
+            tmp1 = ",";
+            tmp3 = 0;
+            
+            while ((tmp3 = tmp2.find(tmp1)) != std::string::npos) {
+            tmp5 = tmp2.substr(0, tmp3);
+            cout << tmp5 << std::endl;
+            port[tmp4] = stoi(tmp5);
+            tmp4++;
+            tmp2.erase(0, tmp3 + tmp1.length());
+            }
+            tmp1 = ""; //reset tmp1 to nothing
+            tmp2 = ""; //reset tmp2 to nothing
+            tmp3 = 0; //reset tmp3 to nothing
+            tmp4 = tmp4 - 1;
+            
+        } else if (tmp2 == "n") { 
         } else {
-            return;
         }
         cout << "would you like to output a file (y/N)" << endl;
         cin >> tmp2;
@@ -115,6 +128,7 @@ int resolver() {
 }
 
 int scanner() {
+    //int tmp4 = sizeof(port) / sizeof(port[ 0 ]) - 1 ;
     for (int i = 0; i <= tmp4; i++) {
             cout << portresponce[i] << endl;
             cout << port[i] << endl;
@@ -128,6 +142,45 @@ int scanner() {
             }else{
                 cout << "tst" << endl;
             }
+            cout << host <<endl;
+            //----------------------
+            // Hostname >> IP
+            if (i = 1) {
+                    DWORD dw;
+                        struct hostent * host_info;
+                        struct in_addr addr;    
+                    // hostname for which we want the IP address
+                    host_info = gethostbyname (host.c_str()); // gethostbyname function retrieves host information.
+                    // gethostbyname returns a pointer of type struct hostent.
+                    //A null pointer is returned if an error occurs. The specific error number can be known by calling WSAGetLastError.
+                
+                    if ( host_info == NULL ){
+                        dw = WSAGetLastError ();
+                        if ( dw != 0 ){
+                            if ( dw == WSAHOST_NOT_FOUND ){
+                                cout << "Host is not found";
+                                return 1;
+                            }
+                            else if ( dw == WSANO_DATA ){
+                                cout << "No data record is found";
+                                return 1;
+                            }
+                            else{
+                                cout << "Function failed with an error : " << dw;
+                                return 1;
+                            }
+                        }
+                    }
+                    else{
+                        cout << "Hostname : " << host_info->h_name << endl;
+                        while ( host_info->h_addr_list[i] != 0 ){
+                            addr.s_addr = *(u_long *) host_info->h_addr_list[i++];
+                            host == inet_ntoa(addr); // inet_ntoa function converts IPv4 address to ASCII string in Internet standard dotted-decimal format.
+                            cout << endl << host << endl << "a" << endl;
+                        }
+                    }
+                }
+            
             //----------------------
             // Create a SOCKET for connecting to server
             SOCKET ConnectSocket;
@@ -139,6 +192,7 @@ int scanner() {
             }else{
                 cout << "socket created" << endl;
             }
+
             //----------------------
             // The sockaddr_in structure specifies the address family,
             // IP address, and port of the server to be connected to.
