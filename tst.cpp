@@ -8,6 +8,7 @@
 using namespace std;*/
 #include <Windows.h> //Sleep 
 #include <iostream>  //cout
+#include <fstream>
 using namespace std;
 //now testing host checking
 /*
@@ -149,21 +150,15 @@ int main(){
 
 //now testing file outputs and how to get data from other subprograms 
 int main(){
-    HANDLE h = CreateFile("test.txt",    // name of the file
-                          GENERIC_WRITE, // open for writing
-                          0,             // sharing mode, none in this case
-                          0,             // use default security descriptor
-                          CREATE_ALWAYS, // overwrite if exists
-                          FILE_ATTRIBUTE_NORMAL,
-                          0);
-    if (h)
-    {
-        std::cout << "CreateFile() succeeded\n";
-        CloseHandle(h);
-    }
-    else
-    {
-        std::cerr << "CreateFile() failed:" << GetLastError() << "\n";
-    }
+    string test1 = "aiodufboadsb'b'a bs";
+    string test2 = "iabfiabibfiabwidbaisbkdbasbd";
+    string test3 = "C:\\Users\\leo\\Documents\\SDD_Major_Work\\test.txt";
+    ofstream testfile;
+    testfile.open (test3);
+    cout<<"file is opend";
+    testfile << test1 << endl << test2 << endl;
+    cout<<"file has been writen";
+    testfile.close();
+    cout<<"file has been closed";
     return 0;
 }
