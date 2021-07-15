@@ -9,9 +9,9 @@ using namespace std;
 #include <Windows.h> //Sleep 
 #include <iostream>  //cout
 #include <fstream>
-using namespace std;*/
+using namespace std;
 //now testing host checking
-/*
+
 string host = "abcdnef.com";
 string tst = "ping " + host + "";
 int main(){
@@ -53,11 +53,11 @@ if (x==0){
     cout<<"failed"<<endl;
     Sleep(5000);
 }
-}*/
+}
 
 
 //now testing sending TCP packets for Scanner() DONE 13/7/21
-/*
+
 
 #ifndef UNICODE
 #define UNICODE
@@ -145,11 +145,11 @@ int main(){
     }
 
 
-}*/
+}
 
 
 //now testing file outputs and how to get data from other subprograms 
-/*int main(){
+
     string test1 = "aiodufboadsb'b'a bs";
     string test2 = "iabfiabibfiabwidbaisbkdbasbd";
     string test3 = "C:\\Users\\leo\\Documents\\SDD_Major_Work\\test.txt";
@@ -161,20 +161,20 @@ int main(){
     testfile.close();
     cout<<"file has been closed";
     return 0;
-}*/
-#include <iostream>  //cout
+
+
 #include <winsock2.h> // scanner()
 #include <Windows.h> //Sleep
-#include <stdlib.h> //System
+
 #include <ws2tcpip.h> // scanner()
 #include <stdio.h>  // scanner()
 #include <fstream> // fout() file creation,opening,editing,closing
-#include <string.h> // string 
+
 #ifndef UNICODE
 #define UNICODE
 #endif
 #pragma comment(lib, "ws2_32.lib") // dependancy of <winsock2.h>
-using namespace std;
+
 int main() {
     //int tmp4 = sizeof(port) / sizeof(port[ 0 ]) - 1 ;
     int tmp4;
@@ -229,7 +229,7 @@ int main() {
                 
     }
             
-    /*for (int i = 0; i <= tmp4; i++) {
+    for (int i = 0; i <= tmp4; i++) {
             cout << portresponce[i] << endl;
             cout << port[i] << endl;
             //----------------------
@@ -295,4 +295,72 @@ int main() {
 
         }
         return 0;*/
+
+#include <iostream>  //cout
+#include <winsock2.h> // scanner()
+#include <Windows.h> //Sleep
+#include <stdlib.h> //System
+#include <ws2tcpip.h> // scanner()
+#include <stdio.h>  // scanner()
+#include <fstream> // fout() file creation,opening,editing,closing
+#include <string.h> // string 
+#ifndef UNICODE
+#define UNICODE
+#endif
+#pragma comment(lib, "ws2_32.lib") // dependancy of <winsock2.h>
+using namespace std;
+
+int main()
+{
+
+    //-----------------------------------------
+    // Declare and initialize variables
+    string host = "realflavour.media";
+    WSADATA wsaData;
+    int iResult;
+
+    DWORD dwError;
+    int i = 0;
+
+    struct hostent *remoteHost;
+    struct in_addr addr;
+
+    char **pAlias;
+
+    // Initialize Winsock
+    iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
+    if (iResult != 0) {
+        printf("WSAStartup failed: %d\n", iResult);
+        WSACleanup();
+        return 1;
+    }
+    // get the stupid ip address
+    remoteHost = gethostbyname(host.c_str());
+    
+    if (remoteHost == NULL) {
+        dwError = WSAGetLastError();
+        if (dwError != 0) {
+            if (dwError == WSAHOST_NOT_FOUND) {
+                printf("Host not found\n");
+                return 1;
+            } else if (dwError == WSANO_DATA) {
+                printf("No data record found\n");
+                return 1;
+            } else {
+                printf("Function failed with error: %ld\n", dwError);
+                return 1;
+            }
+        }
+    } 
+    
+    if (remoteHost->h_addrtype == AF_INET)
+    {
+        while (remoteHost->h_addr_list[i] != 0) {
+            addr.s_addr = *(u_long *) remoteHost->h_addr_list[i++];
+            printf("\tIP Address #%d: %s\n", i, inet_ntoa(addr));
+        }
+    }
+    host = inet_ntoa(addr);
+    WSACleanup();
+    return 0;
 }

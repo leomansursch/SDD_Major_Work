@@ -92,7 +92,7 @@ void starting() {
             tmp1 = ""; //reset tmp1 to nothing
             tmp2 = ""; //reset tmp2 to nothing
             tmp3 = 0; //reset tmp3 to nothing
-            tmp4 = tmp4 - 1;
+
             
         } else if (tmp2 == "n") { 
         } else {
@@ -114,9 +114,62 @@ void starting() {
         }
 }
 
+int ipresolver() { 
+    //-----------------------------------------
+    // Declare and initialize variables
+    WSADATA wsaData;
+    int iResult;
+
+    DWORD dwError;
+    int i = 0;
+
+    struct hostent *remoteHost;
+    struct in_addr addr;
+
+    char **pAlias;
+
+    // Initialize Winsock
+    iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
+    if (iResult != 0) {
+        printf("WSAStartup failed: %d\n", iResult);
+        WSACleanup();
+        return 1;
+    }
+    // get the stupid ip address
+    remoteHost = gethostbyname(host.c_str());
+    
+    if (remoteHost == NULL) {
+        dwError = WSAGetLastError();
+        if (dwError != 0) {
+            if (dwError == WSAHOST_NOT_FOUND) {
+                printf("Host not found\n");
+                return 1;
+            } else if (dwError == WSANO_DATA) {
+                printf("No data record found\n");
+                return 1;
+            } else {
+                printf("Function failed with error: %ld\n", dwError);
+                return 1;
+            }
+        }
+    } 
+    
+    if (remoteHost->h_addrtype == AF_INET)
+    {
+        while (remoteHost->h_addr_list[i] != 0) {
+            addr.s_addr = *(u_long *) remoteHost->h_addr_list[i++];
+        }
+    }
+    host = inet_ntoa(addr);
+    WSACleanup();
+    return 0;
+}
+
 int resolver() { 
+    ipresolver();
     string tst = "ping " + host + " > NULL 2>&1";
     int tmp3 = system(tst.c_str());
+    cout << tmp3 << endl;
     if (tmp3==0){
         cout<<"success"<<endl;
         Sleep(5000);
@@ -127,11 +180,22 @@ int resolver() {
     return 0;
 }
 
+
 int scanner() {
     //int tmp4 = sizeof(port) / sizeof(port[ 0 ]) - 1 ;
+    cout << "this is tmp4" << tmp4;
+    cout << endl << endl << endl;
+
+    for (int i = 0; i <= tmp4; i++){
+        cout << endl << endl << endl;
+        cout << port[i];
+        cout << endl << endl << endl;
+    }
+
     for (int i = 0; i <= tmp4; i++) {
+            cout << i;
             cout << portresponce[i] << endl;
-            cout << port[i] << endl;
+            cout <<  "port being tested:" << port[i] << endl;
             //----------------------
             // Initialize Winsock
             WSADATA wsaData;
@@ -143,44 +207,6 @@ int scanner() {
                 cout << "tst" << endl;
             }
             cout << host <<endl;
-            //----------------------
-            // Hostname >> IP
-            /*if (i = 1) {
-                    DWORD dw;
-                        struct hostent * host_info;
-                        struct in_addr addr;    
-                    // hostname for which we want the IP address
-                    host_info = gethostbyname (host.c_str()); // gethostbyname function retrieves host information.
-                    // gethostbyname returns a pointer of type struct hostent.
-                    //A null pointer is returned if an error occurs. The specific error number can be known by calling WSAGetLastError.
-                
-                    if ( host_info == NULL ){
-                        dw = WSAGetLastError ();
-                        if ( dw != 0 ){
-                            if ( dw == WSAHOST_NOT_FOUND ){
-                                cout << "Host is not found";
-                                return 1;
-                            }
-                            else if ( dw == WSANO_DATA ){
-                                cout << "No data record is found";
-                                return 1;
-                            }
-                            else{
-                                cout << "Function failed with an error : " << dw;
-                                return 1;
-                            }
-                        }
-                    }
-                    else{
-                        cout << "Hostname : " << host_info->h_name << endl;
-                        while ( host_info->h_addr_list[i] != 0 ){
-                            addr.s_addr = *(u_long *) host_info->h_addr_list[i++];
-                            host == inet_ntoa(addr); // inet_ntoa function converts IPv4 address to ASCII string in Internet standard dotted-decimal format.
-                            cout << endl << host << endl << "a" << endl;
-                        }
-                    }
-            }*/
-            
             //----------------------
             // Create a SOCKET for connecting to server
             SOCKET ConnectSocket;
@@ -229,9 +255,9 @@ int scanner() {
             }
             cout << endl << endl << endl;
             WSACleanup();
-
         }
         useport == false;
+        
         return 0;
 }
 
@@ -265,5 +291,3 @@ int main() {
    
 }
 
-
-// Test change for commit

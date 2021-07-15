@@ -1,11 +1,11 @@
 
-Pinging realflavour.media [180.150.45.72] with 32 bytes of data:
-Reply from 180.150.45.72: bytes=32 time=459ms TTL=51
-Request timed out.
-Reply from 180.150.45.72: bytes=32 time=216ms TTL=51
-Reply from 180.150.45.72: bytes=32 time=259ms TTL=51
+Pinging 49.2.84.54 with 32 bytes of data:
+Reply from 49.2.84.54: bytes=32 time=87ms TTL=55
+Reply from 49.2.84.54: bytes=32 time=63ms TTL=55
+Reply from 49.2.84.54: bytes=32 time=55ms TTL=55
+Reply from 49.2.84.54: bytes=32 time=64ms TTL=55
 
-Ping statistics for 180.150.45.72:
-    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Ping statistics for 49.2.84.54:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
 Approximate round trip times in milli-seconds:
-    Minimum = 216ms, Maximum = 459ms, Average = 311ms
+    Minimum = 55ms, Maximum = 87ms, Average = 67ms
