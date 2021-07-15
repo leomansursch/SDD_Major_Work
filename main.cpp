@@ -145,7 +145,7 @@ int scanner() {
             cout << host <<endl;
             //----------------------
             // Hostname >> IP
-            if (i = 1) {
+            /*if (i = 1) {
                     DWORD dw;
                         struct hostent * host_info;
                         struct in_addr addr;    
@@ -179,7 +179,7 @@ int scanner() {
                             cout << endl << host << endl << "a" << endl;
                         }
                     }
-                }
+            }*/
             
             //----------------------
             // Create a SOCKET for connecting to server

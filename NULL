@@ -1,11 +1,11 @@
 
 Pinging realflavour.media [180.150.45.72] with 32 bytes of data:
-Reply from 180.150.45.72: bytes=32 time=82ms TTL=56
-Reply from 180.150.45.72: bytes=32 time=88ms TTL=56
-Reply from 180.150.45.72: bytes=32 time=85ms TTL=56
-Reply from 180.150.45.72: bytes=32 time=88ms TTL=56
+Reply from 180.150.45.72: bytes=32 time=459ms TTL=51
+Request timed out.
+Reply from 180.150.45.72: bytes=32 time=216ms TTL=51
+Reply from 180.150.45.72: bytes=32 time=259ms TTL=51
 
 Ping statistics for 180.150.45.72:
-    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
 Approximate round trip times in milli-seconds:
-    Minimum = 82ms, Maximum = 88ms, Average = 85ms
+    Minimum = 216ms, Maximum = 459ms, Average = 311ms
