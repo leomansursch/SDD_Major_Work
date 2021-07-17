@@ -309,7 +309,7 @@ int main() {
 #endif
 #pragma comment(lib, "ws2_32.lib") // dependancy of <winsock2.h>
 using namespace std;
-
+/*
 int main()
 {
 
@@ -363,4 +363,50 @@ int main()
     host = inet_ntoa(addr);
     WSACleanup();
     return 0;
-}
+}*/
+
+
+// ensuring that file output works
+string fileoutput = "C:\\Users\\leo\\Documents\\SDD_Major_Work\\test.txt", tmp1 = "did";
+int tmp4 = 2;
+int port[50] = {};
+int presponce[50] = {};
+int tmp2 = tmp4 - 1;
+
+
+
+int main() {
+
+    ofstream fileout;
+    fileout.open (fileoutput);
+    cout<<"file is opend";
+    fileout << "The host " << tmp1 << " respond to pings" << endl;
+    cout << "the ports scaned were ";
+    for (int i = 0; i <= tmp4; i++) {
+        fileout << port[i];
+        if (i <= tmp2);
+            fileout << ",";
+    }
+    fileout << "." << endl;
+    fileout << "From these port/s ";
+    for (int i = 0; i <= tmp4; i++){
+        if (presponce[i] == 1) {
+            fileout << port[i] << ",";
+        }
+        else{
+        }
+    }
+    fileout << "are open. and ";
+    for (int i = 0; i <= tmp4; i++){
+        if (presponce[i] == 2) {
+            fileout << port[i] << ",";
+        }
+        else{
+        }
+    }
+    fileout << "are closed." << endl;
+    cout<<"file has been writen";
+    fileout.close();
+    cout<<"file has been closed";
+    return 0;
+} 

@@ -1,11 +1,11 @@
 
-Pinging 49.2.84.54 with 32 bytes of data:
-Reply from 49.2.84.54: bytes=32 time=87ms TTL=55
-Reply from 49.2.84.54: bytes=32 time=63ms TTL=55
-Reply from 49.2.84.54: bytes=32 time=55ms TTL=55
-Reply from 49.2.84.54: bytes=32 time=64ms TTL=55
+Pinging 192.168.0.247 with 32 bytes of data:
+Reply from 192.168.0.247: bytes=32 time=3ms TTL=64
+Reply from 192.168.0.247: bytes=32 time=5ms TTL=64
+Reply from 192.168.0.247: bytes=32 time=8ms TTL=64
+Reply from 192.168.0.247: bytes=32 time=3ms TTL=64
 
-Ping statistics for 49.2.84.54:
+Ping statistics for 192.168.0.247:
     Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
 Approximate round trip times in milli-seconds:
-    Minimum = 55ms, Maximum = 87ms, Average = 67ms
+    Minimum = 3ms, Maximum = 8ms, Average = 4ms
