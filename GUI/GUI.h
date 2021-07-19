@@ -1,5 +1,6 @@
-#pragma once
 #include <iostream>
+#include <msclr\marshal_cppstd.h>
+#include "GUI.cpp"
 namespace GUI {
 
 	using namespace System;
@@ -35,18 +36,27 @@ namespace GUI {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ startbool;
 	protected:
-	private: System::Windows::Forms::CheckBox^ checkBox1;
-	private: System::Windows::Forms::CheckBox^ checkBox2;
-	private: System::Windows::Forms::TextBox^ textBox1;
-	private: System::Windows::Forms::TextBox^ textBox2;
+
+	private: System::Windows::Forms::CheckBox^ portsbool;
+	private: System::Windows::Forms::CheckBox^ odirbool;
+	protected:
+
+
+	private: System::Windows::Forms::TextBox^ Hosttxt;
+	private: System::Windows::Forms::TextBox^ porttxt;
+
+
+
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::TextBox^ textBox3;
-	private: System::Windows::Forms::ProgressBar^ progressBar1;
-	private: System::Windows::Forms::Label^ label4;
+	private: System::Windows::Forms::TextBox^ odir;
+
+
+	private: System::Windows::Forms::Label^ output;
+
 	private: System::Windows::Forms::Label^ label5;
 
 	private:
@@ -62,65 +72,65 @@ namespace GUI {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
-			this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->startbool = (gcnew System::Windows::Forms::Button());
+			this->portsbool = (gcnew System::Windows::Forms::CheckBox());
+			this->odirbool = (gcnew System::Windows::Forms::CheckBox());
+			this->Hosttxt = (gcnew System::Windows::Forms::TextBox());
+			this->porttxt = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->progressBar1 = (gcnew System::Windows::Forms::ProgressBar());
-			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->odir = (gcnew System::Windows::Forms::TextBox());
+			this->output = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
-			// button1
+			// startbool
 			// 
-			this->button1->Location = System::Drawing::Point(431, 375);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
-			this->button1->TabIndex = 0;
-			this->button1->Text = L"Start";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
+			this->startbool->Location = System::Drawing::Point(431, 375);
+			this->startbool->Name = L"startbool";
+			this->startbool->Size = System::Drawing::Size(75, 32);
+			this->startbool->TabIndex = 0;
+			this->startbool->Text = L"Start";
+			this->startbool->UseVisualStyleBackColor = true;
+			this->startbool->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
 			// 
-			// checkBox1
+			// portsbool
 			// 
-			this->checkBox1->AutoSize = true;
-			this->checkBox1->Location = System::Drawing::Point(61, 155);
-			this->checkBox1->Name = L"checkBox1";
-			this->checkBox1->Size = System::Drawing::Size(155, 21);
-			this->checkBox1->TabIndex = 1;
-			this->checkBox1->Text = L"Scan for open ports";
-			this->checkBox1->UseVisualStyleBackColor = true;
-			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &MyForm::checkBox1_CheckedChanged);
+			this->portsbool->AutoSize = true;
+			this->portsbool->Location = System::Drawing::Point(61, 155);
+			this->portsbool->Name = L"portsbool";
+			this->portsbool->Size = System::Drawing::Size(155, 21);
+			this->portsbool->TabIndex = 1;
+			this->portsbool->Text = L"Scan for open ports";
+			this->portsbool->UseVisualStyleBackColor = true;
+			this->portsbool->CheckedChanged += gcnew System::EventHandler(this, &MyForm::checkBox1_CheckedChanged);
 			// 
-			// checkBox2
+			// odirbool
 			// 
-			this->checkBox2->AutoSize = true;
-			this->checkBox2->Location = System::Drawing::Point(61, 222);
-			this->checkBox2->Name = L"checkBox2";
-			this->checkBox2->Size = System::Drawing::Size(209, 21);
-			this->checkBox2->TabIndex = 2;
-			this->checkBox2->Text = L"Output to a custom directory";
-			this->checkBox2->UseVisualStyleBackColor = true;
+			this->odirbool->AutoSize = true;
+			this->odirbool->Location = System::Drawing::Point(61, 222);
+			this->odirbool->Name = L"odirbool";
+			this->odirbool->Size = System::Drawing::Size(209, 21);
+			this->odirbool->TabIndex = 2;
+			this->odirbool->Text = L"Output to a custom directory";
+			this->odirbool->UseVisualStyleBackColor = true;
+			this->odirbool->CheckedChanged += gcnew System::EventHandler(this, &MyForm::checkBox2_CheckedChanged);
 			// 
-			// textBox1
+			// Hosttxt
 			// 
-			this->textBox1->Location = System::Drawing::Point(61, 71);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(100, 22);
-			this->textBox1->TabIndex = 3;
-			this->textBox1->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
+			this->Hosttxt->Location = System::Drawing::Point(61, 71);
+			this->Hosttxt->Name = L"Hosttxt";
+			this->Hosttxt->Size = System::Drawing::Size(100, 22);
+			this->Hosttxt->TabIndex = 3;
+			this->Hosttxt->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox1_TextChanged);
 			// 
-			// textBox2
+			// porttxt
 			// 
-			this->textBox2->Location = System::Drawing::Point(61, 182);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(100, 22);
-			this->textBox2->TabIndex = 4;
+			this->porttxt->Location = System::Drawing::Point(61, 182);
+			this->porttxt->Name = L"porttxt";
+			this->porttxt->Size = System::Drawing::Size(100, 22);
+			this->porttxt->TabIndex = 4;
 			// 
 			// label1
 			// 
@@ -151,35 +161,28 @@ namespace GUI {
 			this->label3->TabIndex = 8;
 			this->label3->Text = L"Enter output directory";
 			// 
-			// textBox3
+			// odir
 			// 
-			this->textBox3->Location = System::Drawing::Point(61, 266);
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(100, 22);
-			this->textBox3->TabIndex = 7;
+			this->odir->Location = System::Drawing::Point(61, 266);
+			this->odir->Name = L"odir";
+			this->odir->Size = System::Drawing::Size(100, 22);
+			this->odir->TabIndex = 7;
 			// 
-			// progressBar1
+			// output
 			// 
-			this->progressBar1->Location = System::Drawing::Point(135, 375);
-			this->progressBar1->Name = L"progressBar1";
-			this->progressBar1->Size = System::Drawing::Size(230, 23);
-			this->progressBar1->TabIndex = 9;
-			// 
-			// label4
-			// 
-			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(568, 76);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(103, 34);
-			this->label4->TabIndex = 10;
-			this->label4->Text = L"will this work\nwhat about this";
+			this->output->AutoSize = true;
+			this->output->Location = System::Drawing::Point(568, 76);
+			this->output->Name = L"output";
+			this->output->Size = System::Drawing::Size(162, 17);
+			this->output->TabIndex = 10;
+			this->output->Text = L"Awating program start ...";
 			// 
 			// label5
 			// 
 			this->label5->AutoSize = true;
 			this->label5->Location = System::Drawing::Point(571, 50);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(46, 17);
+			this->label5->Size = System::Drawing::Size(51, 17);
 			this->label5->TabIndex = 11;
 			this->label5->Text = L"Output";
 			this->label5->Click += gcnew System::EventHandler(this, &MyForm::label5_Click);
@@ -190,17 +193,16 @@ namespace GUI {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(759, 446);
 			this->Controls->Add(this->label5);
-			this->Controls->Add(this->label4);
-			this->Controls->Add(this->progressBar1);
+			this->Controls->Add(this->output);
 			this->Controls->Add(this->label3);
-			this->Controls->Add(this->textBox3);
+			this->Controls->Add(this->odir);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
-			this->Controls->Add(this->textBox2);
-			this->Controls->Add(this->textBox1);
-			this->Controls->Add(this->checkBox2);
-			this->Controls->Add(this->checkBox1);
-			this->Controls->Add(this->button1);
+			this->Controls->Add(this->porttxt);
+			this->Controls->Add(this->Hosttxt);
+			this->Controls->Add(this->odirbool);
+			this->Controls->Add(this->portsbool);
+			this->Controls->Add(this->startbool);
 			this->Name = L"MyForm";
 			this->Text = L"GUI - SDD_Major_Work - Leo Mansur";
 			this->ResumeLayout(false);
@@ -215,10 +217,29 @@ private: System::Void textBox1_TextChanged(System::Object^ sender, System::Event
 private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	String^ hosts = Hosttxt->Text;
+	String^ ports = porttxt->Text;
+	String^ fout = odir->Text;
+	extern std::string tmp2;
+	extern bool useport, uout;
+	extern std::string host, fileoutput;
+	useport = portsbool->Checked;
+	uout = odirbool->Checked;
+	std::string host1 = msclr::interop::marshal_as<std::string>(hosts);
+	std::string tmp21 = msclr::interop::marshal_as<std::string>(ports);
+	std::string fileoutput1 = msclr::interop::marshal_as<std::string>(fout);
+	fileoutput = fileoutput1;
+	tmp2 = tmp21;
+	host = host1;
+
+
+
 }
 private: System::Void checkBox1_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void label5_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void checkBox2_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

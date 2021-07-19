@@ -1,4 +1,5 @@
 //Use g++ for build
+#pragma once
 #include <iostream>  //cout
 #include <winsock2.h> // scanner()
 #include <Windows.h> //Sleep
@@ -13,15 +14,18 @@
 #define UNICODE
 #endif
 #pragma comment(lib, "ws2_32.lib") // dependancy of <winsock2.h>
+using namespace System;
+using namespace System::Windows::Forms; 
 using namespace std;
+
 //Each section of the program is broken down into subprograms (Starting(), resolver(), Scaner(), Outputs())
 //This allows me to do further explination about each subprogram while not cluttering up main()
 //Variables
-bool debug = false;
-bool start = true; // gathe user input
+//bool debug = false;
+bool start = true; // gather user input
 bool resolve = false; //check if host alive
-bool useport = false; // decision for scan()
-bool uout = false; // decision for output()
+extern bool useport, uout; // decision for scan(), decision for output()
+
 
 //user inputs
 string host, fileoutput; // user input for host and file output directory
@@ -34,14 +38,7 @@ int presponce[20] = {}; // creates an array of any length for the responce from 
 
 
 void starting() {
-    cout << "please input hostname or IP address" << endl;
-    cin >> host;
-    cout << "would you like to scan ports? (y/N)" << endl;
-    cin >> tmp2;
-    if (tmp2 == "y") {
-        useport = true;
-        cout << "Please enter the ports seperated by a comma" << endl;
-        cin >> tmp2;
+    if (useport == true) {
         tmp2 = tmp2 + ",";
         tmp1 = ",";
         tmp3 = 0;
@@ -60,28 +57,20 @@ void starting() {
         tmp4 = tmp4 - 1;
 
     }
-    else if (tmp2 == "n") {
-    }
     else {
+        //output to gui that ports will not be scanned
     }
-    cout << "would you like to output a file (y/N)" << endl;
-    cin >> tmp2;
-    if (tmp2 == "y") {
-        uout = true;
-        cout << "Please enter the directory with double \\ " << endl;
-        cin >> fileoutput;
-        start = false;
-        resolve = true;
-    }
-    else if (tmp2 == "n") {
+    if (uout == true) {
         start = false;
         resolve = true;
     }
     else {
         start = false;
         resolve = true;
+        //output to gui that a file will not be created
     }
 }
+
 
 int ipresolver() {
     //-----------------------------------------
@@ -250,8 +239,9 @@ int fout() {
         cout << "the ports scaned were ";
         for (int i = 0; i <= tmp4; i++) {
             fileout << port[i];
-            if (i <= tmp3);
-            fileout << ",";
+            if (i <= tmp3) {
+                fileout << ",";
+            }
         }
         fileout << "." << endl;
         fileout << "From these port/s ";
@@ -278,10 +268,7 @@ int fout() {
     return 0;
 }
 
-int main() {
-    if (debug == true) {
-        debugexamples(); //calling debug setting of variable
-    }
+int climain() {
     if (start == true) {
         starting(); // gathering user input
     }
@@ -294,6 +281,15 @@ int main() {
     if (uout == true) {
         fout(); // output to a file (optional)
     }
-
+    return 0;
 }
 
+[STAThread]
+/*void main(array<System::String^> args) {
+    Application::EnableVisualStyles();
+    Application::SetCompatibleTextRenderingDefault(false);
+    GUI::MyForm form;
+    Application::Run(%form);
+}
+
+*/

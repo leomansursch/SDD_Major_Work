@@ -1,5 +1,67 @@
-﻿  MyForm.cpp
-  .NETFramework,Version=v4.8.AssemblyAttributes.cpp
-  Generating Code...
-  MyForm.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
-LINK : fatal error LNK1561: entry point must be defined
+﻿  GUI.cpp
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(97,18): warning C4996: 'gethostbyname': Use getaddrinfo() or GetAddrInfoW() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(123,12): warning C4996: 'inet_ntoa': Use inet_ntop() or InetNtop() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(87,12): warning C4101: 'pAlias': unreferenced local variable
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(227,13): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(196,41): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(288,11): error C2976: 'std::array': too few template arguments
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30037\include\utility(486): message : see declaration of 'std::array'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(288,6): error C2027: use of undefined type 'std::array'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30037\include\utility(486): message : see declaration of 'std::array'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.h(17,26): error C2011: 'GUI::MyForm': 'class' type redefinition
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.h(17): message : see declaration of 'GUI::MyForm'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(25,6): error C2374: 'start': redefinition; multiple initialization
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(25): message : see declaration of 'start'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(26,6): error C2374: 'resolve': redefinition; multiple initialization
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(26): message : see declaration of 'resolve'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(31,8): error C2086: 'std::string host': redefinition
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(31): message : see declaration of 'host'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(31,14): error C2086: 'std::string fileoutput': redefinition
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(31): message : see declaration of 'fileoutput'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(33,8): error C2086: 'std::string tmp1': redefinition
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(33): message : see declaration of 'tmp1'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(33,14): error C2086: 'std::string tmp2': redefinition
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(33): message : see declaration of 'tmp2'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(33,20): error C2086: 'std::string tmp5': redefinition
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(33): message : see declaration of 'tmp5'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(34,5): error C2086: 'int tmp3': redefinition
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(34): message : see declaration of 'tmp3'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(34,11): error C2086: 'int tmp4': redefinition
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(34): message : see declaration of 'tmp4'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(36,5): error C2374: 'port': redefinition; multiple initialization
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(36): message : see declaration of 'port'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(37,5): error C2374: 'presponce': redefinition; multiple initialization
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(37): message : see declaration of 'presponce'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(40,6): error C2084: function 'void starting(void)' already has a body
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(40): message : see previous definition of 'starting'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(75,5): error C2084: function 'int ipresolver(void)' already has a body
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(75): message : see previous definition of 'ipresolver'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(97,18): warning C4996: 'gethostbyname': Use getaddrinfo() or GetAddrInfoW() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(123,12): warning C4996: 'inet_ntoa': Use inet_ntop() or InetNtop() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(128,5): error C2084: function 'int resolver(void)' already has a body
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(128): message : see previous definition of 'resolver'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(129,5): error C2065: 'ipresolver': undeclared identifier
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(147,5): error C2084: function 'int scanner(void)' already has a body
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(147): message : see previous definition of 'scanner'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(227,13): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(196,41): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(232,5): error C2084: function 'int fout(void)' already has a body
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(232): message : see previous definition of 'fout'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(271,5): error C2084: function 'int climain(void)' already has a body
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(271): message : see previous definition of 'climain'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(273,9): error C2065: 'starting': undeclared identifier
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(276,9): error C2065: 'resolver': undeclared identifier
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(279,9): error C2065: 'scanner': undeclared identifier
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(282,9): error C2065: 'fout': undeclared identifier
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(288,11): error C2976: 'std::array': too few template arguments
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30037\include\utility(486): message : see declaration of 'std::array'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(288,6): error C2371: 'main': redefinition; different basic types
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(288): message : see declaration of 'main'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(288,6): error C2027: use of undefined type 'std::array'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30037\include\utility(486): message : see declaration of 'std::array'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(291,17): error C2079: 'form' uses undefined class 'GUI::MyForm'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(292,27): error C3071: operator '%' can only be applied to an instance of a ref class or a value-type
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(292,27): error C2665: 'System::Windows::Forms::Application::Run': none of the 3 overloads could convert all the argument types
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(292): message : could be 'void System::Windows::Forms::Application::Run(System::Windows::Forms::ApplicationContext ^)'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(292): message : or       'void System::Windows::Forms::Application::Run(System::Windows::Forms::Form ^)'
+C:\Users\leo\Documents\SDD_Major_Work\GUI\GUI.cpp(292,27): message : while trying to match the argument list '(int)'
