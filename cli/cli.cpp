@@ -174,6 +174,7 @@ int resolver() {
         cout<<"Host may be alive but did not respond to pings"<<endl;
         tmp1 = "did not";
         Sleep(5000);
+        
     }
     return 0;
 }
@@ -347,6 +348,9 @@ int main() {
     }   
    if (resolve == true){
         resolver(); // is the host alive
+        if (tmp1 == "did not"){
+            return 0;
+        }
     }
    if (useport == true){
        scanner(); // are the ports open (optional)
