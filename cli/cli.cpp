@@ -19,8 +19,7 @@ using namespace std;
     //debug
 bool debug = false; //example data also verbose data about where we are
     //States
-
-bool start = true; // gathe user input
+bool start = true; // gather user input
 bool resolve = false; //check if host alive
 bool useport = false; // decision for scan()
 bool uout = false; // decision for output()
@@ -28,7 +27,7 @@ bool uout = false; // decision for output()
     //user inputs
 string host, fileoutput; // user input for host and file output directory
     // temp storage
-string tmp1, tmp2, tmp5; // tmp1 for debug menu selection, tmp2 for starting() menu selection
+string tmp1, tmp2, tmp5; // tmp1 for menu selection/ping responce/, tmp2 for starting() menu selection
 int tmp3, tmp4; // tmp3 for ping() alive/dead, tmp4 for no. elemnts of arrays scanner() used for itterating the for loop the amount of times that entitys are in the array
 //internal variables 
 int port[100] = {}; // creats an array of any length for ports
@@ -161,8 +160,8 @@ int ipresolver() {
 
 int resolver() { 
     ipresolver();
-    string tst = "ping " + host + " > NULL 2>&1";
-    tmp3 = system(tst.c_str());
+    string tmp1 = "ping " + host + " > NULL 2>&1";
+    tmp3 = system(tmp1.c_str());
     if (debug == true){
         cout << tmp3 << endl;
     }
@@ -179,14 +178,11 @@ int resolver() {
     return 0;
 }
 
-
 int scanner() {
     //int tmp4 = sizeof(port) / sizeof(port[ 0 ]) - 1 ;
     if (debug == true){
         cout << "this is tmp4: " << tmp4;
         cout << endl << endl << endl;
-    }
-    if (debug == true){
         for (int i = 0; i <= tmp4; i++){
             cout << endl << endl << endl;
             cout << port[i];
@@ -371,6 +367,7 @@ int main() {
    if (uout == true){
        fout(); // output to a file (optional)
    }
+   
    
 }
 
