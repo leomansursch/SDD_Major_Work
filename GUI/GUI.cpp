@@ -38,6 +38,19 @@ int presponce[20] = {}; // creates an array of any length for the responce from 
 
 
 void starting() {
+    String^ hosts = System::Windows::Forms::Hosttxt->Text;
+    String^ hosts = System::Windows::Forms::Button^;
+    String^ hostss = GUI::MyForm::->Text;
+    String^ ports = System::Windows::Forms::porttxt->Text;
+    String^ fout = System::Windows::Forms::odir->Text;
+    useport = System::Windows::Forms::portsbool->Checked;
+    uout = System::Windows::Forms::odirbool->Checked;
+    std::string host1 = msclr::interop::marshal_as<std::string>(hosts);
+    std::string tmp21 = msclr::interop::marshal_as<std::string>(ports);
+    std::string fileoutput1 = msclr::interop::marshal_as<std::string>(fout);
+    fileoutput = fileoutput1;
+    tmp2 = tmp21;
+    host = host1;
     if (useport == true) {
         tmp2 = tmp2 + ",";
         tmp1 = ",";
@@ -284,12 +297,15 @@ int climain() {
     return 0;
 }
 
-[STAThread]
-/*void main(array<System::String^> args) {
+/*[STAThread]
+void main(array<System::String^> args) {
     Application::EnableVisualStyles();
     Application::SetCompatibleTextRenderingDefault(false);
     GUI::MyForm form;
     Application::Run(%form);
 }
+tmp1 = GUI::Myform
 
 */
+
+x = System::Windows::Forms::Hosttext->Text;

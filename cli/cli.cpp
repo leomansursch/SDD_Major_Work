@@ -31,46 +31,24 @@ string host, fileoutput; // user input for host and file output directory
 string tmp1, tmp2, tmp5; // tmp1 for debug menu selection, tmp2 for starting() menu selection
 int tmp3, tmp4; // tmp3 for ping() alive/dead, tmp4 for no. elemnts of arrays scanner() used for itterating the for loop the amount of times that entitys are in the array
 //internal variables 
-int port[20] = {}; // creats an array of any length for ports
-int presponce[20] = {}; // creates an array of any length for the responce from the ports either 0 for fail 1 for success
+int port[100] = {}; // creats an array of any length for ports
+int presponce[100] = {}; // creates an array of any length for the responce from the ports either 0 for fail 1 for success
 
 
 void debugexamples() {
     cout << "ALERT DEBUG IS ON" << endl;
     cout << "variables have been assigned for skiping" << endl;  
-    //start variables
-    host = "realflavour.media";
-    port[0] = 80;
-    port[1] = 443;
-    port[2] = 553;
-    //resolve variables
-    //scan variables
-    //output variables
-    cout << "please select subprogram to skip to" << endl;
-    cout << "1 for 'start', 2 for 'resolve', 3 for 'scan', 4 for 'output'" << endl;
-    cout << "For normal program please select 1" << endl;
-    cin >> tmp1;
-    if (tmp1 == "1"){
-        cout << "proceding with normal program" << endl;
-        debug = false;
-    }else if (tmp1 == "2"){
-        cout << "skiping to resolve" << endl;
-        debug = false;
-        resolve = true;
-        start = false;
-    }else if (tmp1 == "3"){
-        cout << "skiping to scan" << endl;
-        debug = false;
-        useport = true;
-        start = false;
-    }else if (tmp1 == "4"){
-        cout << "skiping to output" << endl;
-        debug = false;
-        uout = true;
-        start = false;
-    }else {
-        cout << "invaid responce please select select a vaild responce";
-    }
+    host = "1.1.1.1";
+    port[0] = 22;
+    port[1] = 80;
+    port[2] = 443;
+    port[3] = 8080;
+    useport = true;
+    tmp2 = "%UserProfile%\\Desktop\\test.txt";
+    cout << "The file output location is on the desktop under the name test" << endl;
+    uout = false;
+    start = false;
+    resolve = true;
     return;
 }
 
@@ -90,7 +68,9 @@ void starting() {
             
             while ((tmp3 = tmp2.find(tmp1)) != std::string::npos) {
             tmp5 = tmp2.substr(0, tmp3);
-            cout << tmp5 << endl;
+            if (debug == true){
+                cout << tmp5 << endl;
+            }
             port[tmp4] = stoi(tmp5);
             tmp4++;
             tmp2.erase(0, tmp3 + tmp1.length());
@@ -137,24 +117,32 @@ int ipresolver() {
     // Initialize Winsock
     iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
     if (iResult != 0) {
-        printf("WSAStartup failed: %d\n", iResult);
+        if (debug == true){
+            printf("WSAStartup failed: %d\n", iResult);
+        }
         WSACleanup();
         return 1;
     }
-    // get the stupid ip address
+    // get the ip address
     remoteHost = gethostbyname(host.c_str());
     
     if (remoteHost == NULL) {
         dwError = WSAGetLastError();
         if (dwError != 0) {
             if (dwError == WSAHOST_NOT_FOUND) {
-                printf("Host not found\n");
+                if (debug == true){
+                    printf("Host not found\n");
+                }
                 return 1;
             } else if (dwError == WSANO_DATA) {
-                printf("No data record found\n");
+                if (debug == true){
+                    printf("No data record found\n");
+                }
                 return 1;
             } else {
-                printf("Function failed with error: %ld\n", dwError);
+                if (debug == true){
+                    printf("Function failed with error: %ld\n", dwError);
+                }
                 return 1;
             }
         }
@@ -174,14 +162,16 @@ int ipresolver() {
 int resolver() { 
     ipresolver();
     string tst = "ping " + host + " > NULL 2>&1";
-    int tmp3 = system(tst.c_str());
-    cout << tmp3 << endl;
+    tmp3 = system(tst.c_str());
+    if (debug == true){
+        cout << tmp3 << endl;
+    }
     if (tmp3==0){
-        cout<<"success"<<endl;
+        cout<<"The host is alive"<<endl;
         tmp1 = "did";
         Sleep(5000);
     }else{
-        cout<<"failed"<<endl;
+        cout<<"Host may be alive but did not respond to pings"<<endl;
         tmp1 = "did not";
         Sleep(5000);
     }
@@ -191,44 +181,61 @@ int resolver() {
 
 int scanner() {
     //int tmp4 = sizeof(port) / sizeof(port[ 0 ]) - 1 ;
-    cout << "this is tmp4: " << tmp4;
-    cout << endl << endl << endl;
-
-    for (int i = 0; i <= tmp4; i++){
+    if (debug == true){
+        cout << "this is tmp4: " << tmp4;
         cout << endl << endl << endl;
-        cout << port[i];
-        cout << endl << endl << endl;
+    }
+    if (debug == true){
+        for (int i = 0; i <= tmp4; i++){
+            cout << endl << endl << endl;
+            cout << port[i];
+            cout << endl << endl << endl;
+        }
     }
 
     for (int i = 0; i <= tmp4; i++) {
             //tmp2 << "port: " << port[i] << "is open";
             //tmp3 << "port: " << port[i] << "is open";
             WSACleanup();
-            cout << "WSACleanup has been ran" << endl;
-            cout << i << endl;
+            if (debug == true){
+                cout << "WSACleanup has been ran" << endl;
+                cout << i << endl;
+            }
             //cout << presponce[i] << endl;
-            cout <<  "port being tested:" << port[i] << endl;
+            if (debug == true){
+                cout <<  "port being tested:" << port[i] << endl;
+            }
             //----------------------
             // Initialize Winsock
             WSADATA wsaData;
             int iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
             if (iResult != NO_ERROR) {
-                wprintf(L"WSAStartup function failed with error: %d\n", iResult);
+                if (debug == true){
+                    wprintf(L"WSAStartup function failed with error: %d\n", iResult);
+                }
                 return 1;
             }else{
-                cout << "winsoc started" << endl;
+                if (debug == true){
+                    cout << "winsock started" << endl;
+                }
             }
-            cout << host <<endl;
+            if (debug == true){
+                cout << host <<endl;
+            }
             //----------------------
             // Create a SOCKET for connecting to server
             SOCKET ConnectSocket;
             ConnectSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
             if (ConnectSocket == INVALID_SOCKET) {
-                wprintf(L"socket function failed with error: %ld\n", WSAGetLastError());
+                if (debug == true){
+                    wprintf(L"socket function failed with error: %ld\n", WSAGetLastError());
+                }
                 WSACleanup();
-                return 1;
+                cout << port[i] << " is not a valid port" << endl;
             }else{
-                cout << "socket created" << endl;
+                if (debug == true){
+                    cout << "socket created" << endl;
+                }
             }
 
             //----------------------
@@ -237,35 +244,49 @@ int scanner() {
             sockaddr_in clientService;
             clientService.sin_family = AF_INET;
             clientService.sin_addr.s_addr = inet_addr(host.c_str());
-            cout << port[i] <<  " why no work?" << endl;
             clientService.sin_port = htons(port[i]);
-            cout << clientService.sin_family << " " <<  clientService.sin_addr.s_addr << " " << clientService.sin_port << endl;
-
+            
             //----------------------
             // Connect to server.
             iResult = connect(ConnectSocket, (SOCKADDR *) & clientService, sizeof (clientService));
             if (iResult == SOCKET_ERROR) {
-                wprintf(L"connect function failed with error: %ld\n", WSAGetLastError());
-                //presponce[i] = 2;
+                if (debug == true){
+                    wprintf(L"connect function failed with error: %ld\n", WSAGetLastError());
+                }
+                presponce[i] = 2;
+                if (debug == true){
+                   cout << presponce[i];
+                }
                 iResult = closesocket(ConnectSocket);
                 WSACleanup();
                 if (iResult == SOCKET_ERROR)
+                    if (debug == true){
                     wprintf(L"closesocket function failed with error: %ld\n", WSAGetLastError());
+                    }
                 WSACleanup();
             }
             else{
-                cout << "wtf is going on" << endl;
-                cout << "Connected to server" << endl;
-                //presponce[i] = 1;
-                cout << "ones done" << endl;
+                
+                cout << "Connected to server on " << port[i] << endl;
+                presponce[i] = 1;
+                if (debug == true){
+                    cout << "ones done" << endl;
+                }
             }
             iResult = closesocket(ConnectSocket);
             if (iResult == SOCKET_ERROR) {
-                wprintf(L"closesocket function failed with error: %ld\n", WSAGetLastError());
+                if (debug == true){
+                    wprintf(L"closesocket function failed with error: %ld\n", WSAGetLastError());
+                }
                 WSACleanup();
-                cout << "WSACleanup has been ran" << endl;
+                if (debug == true){
+                    cout << "WSACleanup has been ran" << endl;
+                }
+                
             }
-            cout << endl << endl << endl;
+            if (debug == true){
+                cout << endl << endl << endl;
+            }
         }
         useport == false;
         
@@ -276,10 +297,13 @@ int fout() {
     tmp3 = tmp4 - 1; 
     ofstream fileout;
     fileout.open (fileoutput);
-    cout<<"file is opend" << endl;;
+    cout << "now outputing file" << endl;
+    if (debug == true){
+     cout<<"file is opend" << endl;;
+    }
     fileout << "The host " << tmp1 << " respond to pings" << endl;
     if (useport = true){
-        cout << "the ports scaned were ";
+        fileout << "the ports scaned were ";
         for (int i = 0; i <= tmp4; i++) {
             fileout << port[i];
             if (i <= tmp3);
@@ -294,7 +318,7 @@ int fout() {
             else{
             }
         }
-        fileout << "are open. and ";
+        fileout << "are open." << endl << "The folowing ports are closed / did not respond to TCP pings: ";
         for (int i = 0; i <= tmp4; i++){
             if (presponce[i] == 2) {
                 fileout << port[i] << ",";
@@ -302,11 +326,15 @@ int fout() {
             else{
             }
         }
-        fileout << "are closed." << endl;
+
     }
-    cout<<"file has been writen"<<endl;
+    if (debug == true){
+        cout<<"file has been writen"<<endl;
+    }
     fileout.close();
-    cout<<"file has been closed"<<endl;
+    if (debug == true){
+     cout<<"file has been closed"<<endl;
+    }
     return 0;
 } 
 
