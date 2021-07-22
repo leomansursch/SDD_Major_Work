@@ -302,6 +302,10 @@ int fout() {
     if (debug == true){
      cout<<"file is opend" << endl;;
     }
+    if (tmp1 == "y")
+    {
+        tmp1 = "Did not";
+    }
     fileout << "The host " << tmp1 << " respond to pings" << endl;
     if (useport = true){
         fileout << "the ports scaned were ";
@@ -349,7 +353,16 @@ int main() {
    if (resolve == true){
         resolver(); // is the host alive
         if (tmp1 == "did not"){
-            return 0;
+            cout << "The host did not respond to pings would you like to continue? y/N" << endl;
+            cin >> tmp1;
+            if (tmp1 == "y"){
+            }
+            else if (tmp1 == "n"){
+                return 0;
+            }
+            else {
+                return 0;
+            }
         }
     }
    if (useport == true){
